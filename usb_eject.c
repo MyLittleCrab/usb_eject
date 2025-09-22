@@ -67,7 +67,7 @@ int eject_device(uint16_t vid, uint16_t pid, int iface) {
     libusb_device *dev = libusb_get_device(handle);
     unsigned char ep_out = 0, ep_in = 0;
 
-    // Если iface == -1, ищем первый Mass Storage интерфейс
+    // If iface == -1, search for the first Mass Storage interface
     if (iface < 0) {
         struct libusb_config_descriptor *cfg;
         if (libusb_get_active_config_descriptor(dev, &cfg) == 0) {
