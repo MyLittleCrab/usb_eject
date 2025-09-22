@@ -8,32 +8,32 @@ Many USB peripheral devices (like certain Wi-Fi adapters, modems, etc.) initiall
 
 ## How to Use
 
-### 1. Build the Project (macOS)
+### 1. Build the Project
 
 **Note for macOSx64 users**: A pre-compiled binary `usb_eject` is included in the repository. If you are on macOSx64, you can skip the build steps and directly use the provided binary by running `./usb_eject`.
 
-To compile the `usb_eject` utility on macOS, you need `libusb`.
+To compile the `usb_eject` utility, a `Makefile` is provided for both **macOS** and **Debian-like Linux** distributions.
 
-You can run the provided script to install dependencies:
+#### Install Dependencies
+
+First, install the necessary dependencies for your operating system:
+
+**macOS:**
 ```bash
-bash install_dependencies_macos.sh
+make install-deps
 ```
 
-Alternatively, you can install dependencies manyally if you don't have it:
-
-Install `Homebrew`:
+**Debian-like Linux (e.g., Ubuntu, Debian):**
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+make install-deps
 ```
+This command will use `Homebrew` on macOS and `apt` on Linux to install `libusb` and `pkg-config`. It may require `sudo` for Linux.
 
-Then, install `libusb` using Homebrew:
-```bash
-brew install libusb
-```
+#### Compile
 
-After dependencies are installed, compile the project:
+After installing dependencies, compile the project using `make`:
 ```bash
-bash compile_macos.sh
+make
 ```
 This will create an executable file named `usb_eject` in the project root directory.
 
@@ -77,32 +77,32 @@ After a successful ejection, your device should now be recognized by the system 
 
 ## Как пользоваться
 
-### 1. Сборка проекта (macOS)
+### 1. Сборка проекта
 
 **Примечание для пользователей macOSx64**: Предварительно скомпилированный бинарный файл `usb_eject` включен в репозиторий. Если вы используете macOSx64, вы можете пропустить шаги сборки и напрямую использовать предоставленный бинарный файл, запустив `./usb_eject`.
 
-Для компиляции утилиты `usb_eject` на macOS вам понадобится `libusb`.
+Для компиляции утилиты `usb_eject` предоставляется `Makefile` как для macOS, так и для дистрибутивов Linux на базе Debian.
 
-Вы можете запустить предоставленный скрипт для установки зависимостей:
+#### Установка зависимостей
+
+Сначала установите необходимые зависимости для вашей операционной системы:
+
+**macOS:**
 ```bash
-bash install_dependencies_macos.sh
+make install-deps
 ```
 
-В качестве альтернативы, вы можете установить зависимости вручную, если у вас их нет:
-
-Установите `Homebrew`:
+**Debian-подобные дистрибутивы Linux (например, Ubuntu, Debian):**
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+make install-deps
 ```
+Эта команда будет использовать `Homebrew` на macOS и `apt` в Linux для установки `libusb` и `pkg-config`. Для Linux может потребоваться `sudo`.
 
-Затем установите `libusb` с помощью Homebrew:
-```bash
-brew install libusb
-```
+#### Компиляция
 
-После установки зависимостей скомпилируйте проект:
+После установки зависимостей скомпилируйте проект с помощью `make`:
 ```bash
-bash compile_macos.sh
+make
 ```
 Это создаст исполняемый файл с именем `usb_eject` в корневом каталоге проекта.
 
