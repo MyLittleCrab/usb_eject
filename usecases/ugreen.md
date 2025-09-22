@@ -1,4 +1,4 @@
-# UGREEN USB Wi-Fi Dongle (Realtek 802.11ac) Use Case
+# UGREEN USB Wi-Fi Dongle (AC650 and similar models based on Realtek 802.11ac) Use Case
 
 This document describes a common use case for the `usb_eject` utility when dealing with a UGREEN USB Wi-Fi dongle (featuring a Realtek 802.11ac chip) on macOS.
 
@@ -43,7 +43,7 @@ Once ejected, your installed Wi-Fi driver should now be able to correctly detect
 
 ---
 
-# Пример использования USB Wi-Fi адаптера UGREEN (Realtek 802.11ac)
+# Пример использования USB Wi-Fi адаптера UGREEN AC650 и аналогичные модели на базе Realtek 802.11ac
 
 Этот документ описывает распространенный сценарий использования утилиты `usb_eject` при работе с USB Wi-Fi адаптером UGREEN (с чипом Realtek 802.11ac) на macOS.
 
