@@ -1,10 +1,6 @@
 # usb_eject
 
-This project provides a utility to "eject" USB devices that initially present themselves as a virtual CD-ROM drive containing drivers. This is a common practice by some manufacturers to simplify driver installation, but it can prevent the device from functioning as intended until the virtual CD-ROM is ejected. This tool automates that ejection process.
-
-## Problem Solved
-
-Many USB peripheral devices (like certain Wi-Fi adapters, modems, etc.) initially appear to the operating system as a USB CD-ROM drive. This virtual drive often contains the necessary drivers for the device. However, to use the device for its primary function (e.g., as a network adapter or modem), the virtual CD-ROM needs to be "ejected" first. This tool sends the necessary SCSI command to perform this ejection, allowing the device to switch to its intended operational mode.
+This utility automates the process of ejecting USB devices that initially appear as virtual CD-ROM drives containing drivers (such as some Wi-Fi adapters and modems), allowing the device to switch to its intended working mode without manual intervention.
 
 ## How to Use
 
@@ -37,7 +33,7 @@ This will create an executable file named `usb_eject` in the project root direct
 
 Execute the compiled program:
 ```bash
-./usb_eject
+sudo ./usb_eject
 ```
 
 The program will list all connected USB devices with their Vendor ID (VID) and Product ID (PID), along with their manufacturer and product names if available.
@@ -65,11 +61,7 @@ After a successful ejection, your device should now be recognized by the system 
 
 # usb_eject (Русский)
 
-Этот проект предоставляет утилиту для «извлечения» USB-устройств, которые изначально представляются как виртуальный CD-ROM привод, содержащий драйверы. Это распространенная практика некоторых производителей для упрощения установки драйверов, но она может помешать устройству функционировать по назначению до тех пор, пока виртуальный CD-ROM не будет извлечен. Этот инструмент автоматизирует процесс извлечения.
-
-## Решаемая проблема
-
-Многие периферийные USB-устройства (например, некоторые Wi-Fi адаптеры, модемы и т. д.) изначально представляются операционной системе как USB CD-ROM привод. Этот виртуальный привод часто содержит необходимые драйверы для устройства. Однако, чтобы использовать устройство по его основному назначению (например, в качестве сетевого адаптера или модема), виртуальный CD-ROM необходимо сначала «извлечь». Этот инструмент отправляет необходимую команду SCSI для выполнения этого извлечения, позволяя устройству переключиться в предполагаемый рабочий режим.
+Эта утилита автоматически извлекает USB-устройства, которые изначально определяются как виртуальный CD-ROM с драйверами (например, некоторые Wi-Fi адаптеры и модемы), чтобы устройство сразу переходило в рабочий режим без ручных действий.
 
 ## Как пользоваться
 
@@ -102,7 +94,7 @@ make
 
 Запустите скомпилированную программу:
 ```bash
-./usb_eject
+sudo ./usb_eject
 ```
 
 Программа выведет список всех подключенных USB-устройств с их Vendor ID (VID) и Product ID (PID), а также названиями производителя и продукта, если они доступны.

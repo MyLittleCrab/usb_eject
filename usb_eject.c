@@ -57,7 +57,7 @@ int find_mass_storage_endpoints(libusb_device *dev, int iface, unsigned char *ep
 }
 
 // ======= SEND STANDARD EJECT =======
-int eject_device(uint16_t vid, uint16_t pid, int iface) {
+int eject_device(uint16_t vid, uint16_t pid) {
     libusb_context *ctx;
     libusb_init(&ctx);
 
@@ -67,33 +67,34 @@ int eject_device(uint16_t vid, uint16_t pid, int iface) {
     libusb_device *dev = libusb_get_device(handle);
     unsigned char ep_out = 0, ep_in = 0;
 
-    // If iface == -1, search for the first Mass Storage interface
-    if (iface < 0) {
-        struct libusb_config_descriptor *cfg;
-        if (libusb_get_active_config_descriptor(dev, &cfg) == 0) {
-            int found = 0;
-            for (int i=0; i<cfg->bNumInterfaces && !found; i++) {
-                const struct libusb_interface *intf = &cfg->interface[i];
-                for (int alt=0; alt<intf->num_altsetting && !found; alt++) {
-                    const struct libusb_interface_descriptor *desc = &intf->altsetting[alt];
-                    if (desc->bInterfaceClass == 0x08) { // Mass Storage
-                        iface = desc->bInterfaceNumber;
-                        found = 1;
-                    }
+    int iface = -1;
+
+    struct libusb_config_descriptor *cfg;
+    if (libusb_get_active_config_descriptor(dev, &cfg) == 0) {
+        int found = 0;
+        for (int i=0; i<cfg->bNumInterfaces && !found; i++) {
+            const struct libusb_interface *intf = &cfg->interface[i];
+            for (int alt=0; alt<intf->num_altsetting && !found; alt++) {
+                const struct libusb_interface_descriptor *desc = &intf->altsetting[alt];
+                if (desc->bInterfaceClass == 0x08) { // Mass Storage
+                    iface = desc->bInterfaceNumber;
+                    found = 1;
                 }
             }
-            libusb_free_config_descriptor(cfg);
         }
-        if (iface < 0) {
-            fprintf(stderr, "No Mass Storage interface found!\n");
-            libusb_close(handle); libusb_exit(ctx); return 1;
-        }
+        libusb_free_config_descriptor(cfg);
+    }
+
+    if (iface < 0) {
+        fprintf(stderr, "No Mass Storage interface found!\n");
+        libusb_close(handle); libusb_exit(ctx); return 1;
     }
 
     if (find_mass_storage_endpoints(dev, iface, &ep_out, &ep_in) != 0) {
         fprintf(stderr, "Mass Storage endpoints not found on iface %d\n", iface);
         libusb_close(handle); libusb_exit(ctx); return 1;
     }
+
     printf("Using interface %d: ep_out=0x%02x ep_in=0x%02x\n", iface, ep_out, ep_in);
 
     if (libusb_kernel_driver_active(handle, iface) == 1)
@@ -191,7 +192,7 @@ int main() {
     uint16_t pid = entries[choice-1].pid;
 
     printf("Ejecting device %04x:%04x ...\n", vid, pid);
-    eject_device(vid, pid, -1);
+    eject_device(vid, pid);
 
     libusb_free_device_list(devs, 1);
     libusb_exit(ctx);
