@@ -135,7 +135,20 @@ cleanup:
 }
 
 // ======= MAIN =======
-int main() {
+int main(int argc, char *argv[]) {
+    // If two arguments: treat as VID PID and eject immediately
+    if (argc == 3) {
+        uint16_t vid = (uint16_t)strtol(argv[1], NULL, 16);
+        uint16_t pid = (uint16_t)strtol(argv[2], NULL, 16);
+        printf("Ejecting device %04x:%04x ...\n", vid, pid);
+        return eject_device(vid, pid);
+    }
+
+    int only_list = 0;
+    if (argc > 1 && strcmp(argv[1], "--only-list") == 0) {
+        only_list = 1;
+    }
+
     libusb_context *ctx;
     libusb_init(&ctx);
 
@@ -146,7 +159,9 @@ int main() {
     device_entry *entries = calloc(cnt, sizeof(device_entry));
     int index = 0;
 
-    printf("Connected USB devices:\n");
+    if (!only_list){
+        printf("Connected USB devices:\n");
+    }
     for (ssize_t i=0; i<cnt; i++) {
         struct libusb_device_descriptor desc;
         if (libusb_get_device_descriptor(devs[i], &desc) != 0) continue;
@@ -172,6 +187,13 @@ int main() {
 
     if (index == 0) {
         printf("No USB devices found.\n");
+        libusb_free_device_list(devs, 1);
+        libusb_exit(ctx);
+        free(entries);
+        return 0;
+    }
+
+    if (only_list) {
         libusb_free_device_list(devs, 1);
         libusb_exit(ctx);
         free(entries);
