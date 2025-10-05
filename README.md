@@ -1,29 +1,21 @@
 # usb_eject
 
-This utility automates the process of ejecting USB devices that initially appear as virtual CD-ROM drives containing drivers (such as some Wi-Fi adapters and modems), allowing the device to switch to its intended working mode without manual intervention.
+This MacOS + Linux utility automates the process of ejecting USB devices that initially appear as virtual CD-ROM drives containing drivers (such as some Wi-Fi adapters and modems), allowing the device to switch to its intended working mode without manual intervention.
 
 ## How to Use
 
-### 1. Build the Project
+## Download precompiled application
 
-**Note for macOSx64 users**: A pre-compiled binary `usb_eject` is included in the repository. If you are on macOSx64, you can skip the build steps and directly use the provided binary by running `./usb_eject`. (if you have the libusb library installed. If not -- look at the section **"installing dependencies".**)
+You can download a ready-to-use precompiled **MacOS** application from the "Releases" section on the project's GitHub page. This is the easiest way to get started if you do not want to build from source.
+
+
+### 1. Build the Project
 
 To compile the `usb_eject` utility, a `Makefile` is provided for both **macOS** and **Debian-like Linux** distributions.
 
-#### Install Dependencies
-
-First, install the necessary dependencies for your operating system:
-
-**macOS or Debian-like Linux (e.g., Ubuntu, Debian):**
-```bash
-make install-deps
-```
-
-This command will use `Homebrew` on macOS and `apt` on Linux to install `libusb` and `pkg-config`. It may require `sudo` for Linux.
-
 #### Compile
 
-After installing dependencies, compile the project using `make`:
+Compile the project using `make`:
 ```bash
 make
 ```
@@ -61,26 +53,17 @@ After a successful ejection, your device should now be recognized by the system 
 
 # usb_eject (Русский)
 
-Эта утилита автоматически извлекает USB-устройства, которые изначально определяются как виртуальный CD-ROM с драйверами (например, некоторые Wi-Fi адаптеры и модемы), чтобы устройство сразу переходило в рабочий режим без ручных действий.
+Эта MacOS + Linux утилита автоматически извлекает USB-устройства, которые изначально определяются как виртуальный CD-ROM с драйверами (например, некоторые Wi-Fi адаптеры и модемы), чтобы устройство сразу переходило в рабочий режим без ручных действий.
 
 ## Как пользоваться
 
+## Скачивание заранее скомпилированного приложения
+
+Вы можете скачать готовое MacOS приложение в разделе "Releases" на странице проекта GitHub. Это самый простой способ начать работу, если вы не хотите собирать программу из исходников.
+
 ### 1. Сборка проекта
 
-**Примечание для пользователей macOSx64**: Предварительно скомпилированный бинарный файл `usb_eject` включен в репозиторий. Если вы используете macOSx64, вы можете пропустить шаги сборки и напрямую использовать предоставленный бинарный файл, запустив `./usb_eject` (при условии, что у вас установлена библиотека libusb. Если нет -- посмотрите на пункт **"установка зависимостей"**).
-
 Для компиляции утилиты `usb_eject` предоставляется `Makefile` как для macOS, так и для дистрибутивов Linux на базе Debian.
-
-#### Установка зависимостей
-
-Сначала установите необходимые зависимости для вашей операционной системы:
-
-**macOS или Debian-подобные дистрибутивы Linux (например, Ubuntu, Debian):**
-```bash
-make install-deps
-```
-
-Эта команда будет использовать `Homebrew` на macOS и `apt` в Linux для установки `libusb` и `pkg-config`. Для Linux может потребоваться `sudo`.
 
 #### Компиляция
 

@@ -1,19 +1,27 @@
 # Makefile for usb_eject utility
 
-CC      ?= cc
+CC      ?= gcc
 CFLAGS  = -Wall -Wextra -std=c99 -pedantic
 LDFLAGS =
 TARGET  = usb_eject
 SRCS    = usb_eject.c
 OBJS    = $(SRCS:.c=.o)
 
-UNAME_S := $(shell uname -s)
+LIBUSB_STATIC_FLAGS = $(shell pkg-config --cflags --libs --static libusb-1.0)
+LIBUSB_A = /usr/local/Cellar/libusb/1.0.29/lib/libusb-1.0.a
+LIBUSB_A_ARM = $(abspath ./libusb/1.0.29/lib/libusb-1.0.a)
 
 .PHONY: all clean install-deps help
 
 # ------------------- Build -------------------
 
-all: $(TARGET)
+all: install-deps $(TARGET)
+
+$(TARGET)-static-current: 
+	$(CC) $(CFLAGS) $(SRCS) -o $(TARGET)-current $(LDFLAGS) $(filter-out -lusb-1.0,$(LIBUSB_STATIC_FLAGS)) $(LIBUSB_A)
+
+$(TARGET)-static-arm-onx64:
+	$(CC) -arch arm64 $(CFLAGS) $(SRCS) -o $(TARGET)-arm64 $(LDFLAGS) $(filter-out -lusb-1.0,$(LIBUSB_STATIC_FLAGS)) $(LIBUSB_A_ARM)
 
 $(TARGET): $(OBJS)
 	$(CC) $(OBJS) -o $@ $(LDFLAGS) $(shell pkg-config --libs libusb-1.0)
@@ -27,26 +35,10 @@ clean:
 # ------------------- Dependencies -------------------
 
 install-deps:
-	@if [ "$(UNAME_S)" = "Darwin" ]; then \
-		echo "Installing dependencies for macOS..."; \
-		if ! command -v brew >/dev/null 2>&1; then \
-			echo "Homebrew not found. Installing..."; \
-			/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; \
-		fi; \
-		brew install libusb pkg-config; \
-	elif [ "$(UNAME_S)" = "Linux" ]; then \
-		echo "Installing dependencies for Debian/Ubuntu..."; \
-		if command -v apt >/dev/null 2>&1; then \
-			sudo apt update && sudo apt install -y libusb-1.0-0-dev pkg-config; \
-		else \
-			echo "apt not found. Please install libusb-1.0-0-dev and pkg-config manually."; \
-			exit 1; \
-		fi; \
-	else \
-		echo "Unsupported OS: $(UNAME_S). Install libusb-1.0 and pkg-config manually."; \
-		exit 1; \
-	fi
+	bash ./scripts/install_deps.sh
 
+install-macos-arm-deps:
+	bash ./scripts/install_macos_arm_deps.sh
 # ------------------- Help -------------------
 
 help:
