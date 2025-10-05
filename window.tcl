@@ -26,9 +26,23 @@ button .buttons.eject -text "Eject" -width 10 -command {
         set item [.list get $sel]
         # Парсим VID и PID из строки
         if {[regexp {VID:PID = ([0-9a-fA-F]+):([0-9a-fA-F]+)} $item -> vid pid]} {
-            set result [exec sudo ./usb_eject $vid $pid]
-            tk_messageBox -message "Ejecting: $item\n\n$result" -icon info
-            exit
+            set exe_path [file join [pwd] "usb_eject"]
+            # Команда с sudo/administrator
+            if {$tcl_platform(os) eq "Darwin"} {
+                # macOS: AppleScript для sudo
+                set script "do shell script \"$exe_path $vid $pid\" with administrator privileges"
+                set cmd [list osascript -e $script]
+            } else {
+                # Linux: pkexec
+                set cmd [list pkexec $exe_path $vid $pid]
+            }
+
+            if {[catch {set result [exec {*}$cmd]} err]} {
+                tk_messageBox -message "Error: $err\nCMD: $cmd" -icon error
+            } else {
+                tk_messageBox -message "Ejecting: $item\n\n$result" -icon info
+                exit
+            }
         } else {
             tk_messageBox -message "Could not parse VID/PID from: $item" -icon error
         }
