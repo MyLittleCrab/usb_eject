@@ -8,11 +8,32 @@ wm geometry . 650x550
 listbox .list -selectmode single -height 5
 pack .list -fill both -expand 1 -padx 10 -pady 10
 
-# Получить список устройств через usb_eject --only-list
-set devices [split [exec ./usb_eject --only-list] "\n"]
-foreach line $devices {
-    .list insert end $line
+# Асинхронная загрузка списка устройств
+proc load_devices_async {} {
+    .list delete 0 end
+    .list insert end "Loading devices..."
+    update
+    after 100 [list load_devices]
 }
+
+proc load_devices {} {
+    catch {set devices [split [exec ./usb_eject --only-list] "\n"]} err
+    .list delete 0 end
+    if {[info exists devices] && [llength $devices] > 0} {
+        foreach line $devices {
+            if {[regexp {VID:PID =} $line]} {
+                .list insert end $line
+            }
+        }
+        if {[.list size] == 0} {
+            .list insert end "No USB devices found."
+        }
+    } else {
+        .list insert end "Error loading devices: $err"
+    }
+}
+
+load_devices_async
 
 # --- Кнопки ---
 frame .buttons
