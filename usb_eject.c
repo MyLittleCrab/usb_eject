@@ -58,8 +58,12 @@ int find_mass_storage_endpoints(libusb_device *dev, int iface, unsigned char *ep
 
 // ======= SEND STANDARD EJECT =======
 int eject_device(uint16_t vid, uint16_t pid) {
-    libusb_context *ctx;
-    libusb_init(&ctx);
+    libusb_context *ctx = NULL;
+    int rc = libusb_init(&ctx);
+    if (rc != 0) {
+        fprintf(stderr, "libusb_init failed: %d\n", rc);
+        return 1;
+    }
 
     libusb_device_handle *handle = libusb_open_device_with_vid_pid(ctx, vid, pid);
     if (!handle) { fprintf(stderr, "Device %04x:%04x not found\n", vid, pid); libusb_exit(ctx); return 1; }
@@ -97,12 +101,16 @@ int eject_device(uint16_t vid, uint16_t pid) {
 
     printf("Using interface %d: ep_out=0x%02x ep_in=0x%02x\n", iface, ep_out, ep_in);
 
-    if (libusb_kernel_driver_active(handle, iface) == 1)
+    int claimed = 0;
+    if (libusb_kernel_driver_active(handle, iface) == 1) {
         libusb_detach_kernel_driver(handle, iface);
-    if (libusb_claim_interface(handle, iface) != 0) {
-        fprintf(stderr, "Cannot claim interface %d\n", iface);
+    }
+    rc = libusb_claim_interface(handle, iface);
+    if (rc != 0) {
+        fprintf(stderr, "Cannot claim interface %d: %d\n", iface, rc);
         libusb_close(handle); libusb_exit(ctx); return 1;
     }
+    claimed = 1;
 
     struct cbw cb;
     memset(&cb, 0, sizeof(cb));
@@ -116,9 +124,11 @@ int eject_device(uint16_t vid, uint16_t pid) {
     cb.CBWCB[4] = 0x01; // LoEj=1 -> eject
 
     int transferred;
+    fflush(stdout);
     int r = libusb_bulk_transfer(handle, ep_out, (unsigned char*)&cb, sizeof(cb), &transferred, 2000);
     if (r != 0) { fprintf(stderr, "Bulk transfer CBW failed: %d\n", r); goto cleanup; }
     printf("CBW sent (%d bytes)\n", transferred);
+    fflush(stdout);
 
     struct csw cs;
     r = libusb_bulk_transfer(handle, ep_in, (unsigned char*)&cs, sizeof(cs), &transferred, 2000);
@@ -128,7 +138,10 @@ int eject_device(uint16_t vid, uint16_t pid) {
     printf("Eject command successful, CSW status=0x%02x\n", cs.bCSWStatus);
 
 cleanup:
-    libusb_release_interface(handle, iface);
+    if (claimed) {
+        int rc2 = libusb_release_interface(handle, iface);
+        if (rc2 != 0) fprintf(stderr, "Warning: release_interface returned %d\n", rc2);
+    }
     libusb_close(handle);
     libusb_exit(ctx);
     return 0;
