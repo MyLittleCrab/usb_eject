@@ -1,6 +1,6 @@
 # Eject2Net
 
-This MacOS + Linux utility automates the process of ejecting USB devices that initially appear as virtual CD-ROM drives containing drivers (such as some Wi-Fi adapters and modems), allowing the device to switch to its intended working mode without manual intervention.
+Eject2Net — a lightweight utility that automatically switches USB modems and Wi-Fi adapters from storage mode (CD-ROM with drivers) to network mode, enabling full connectivity right after plug-in.
 
 ## How to Use
 
@@ -59,7 +59,7 @@ After a successful ejection, your device should now be recognized by the system 
 
 # Eject2Net (Русский)
 
-Эта MacOS + Linux утилита автоматически извлекает USB-устройства, которые изначально определяются как виртуальный CD-ROM с драйверами (например, некоторые Wi-Fi адаптеры и модемы), чтобы устройство сразу переходило в рабочий режим без ручных действий.
+Eject2Net — лёгкая утилита, автоматически переключающая USB-модемы и Wi-Fi-адаптеры из режима накопителя (CD-ROM с драйверами) в сетевой режим, обеспечивая готовность к работе сразу после подключения.
 
 ## Как пользоваться
 
