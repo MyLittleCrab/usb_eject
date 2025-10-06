@@ -8,6 +8,11 @@ This MacOS + Linux utility automates the process of ejecting USB devices that in
 
 You can download a ready-to-use precompiled **MacOS** application from the "Releases" section on the project's GitHub page. This is the easiest way to get started if you do not want to build from source.
 
+### Modes
+
+The utility works in both console (command-line) and graphical modes. You can run it from the terminal as shown above, or use the included macOS GUI application `usb_eject.app` (double-click it in Finder or run `open usb_eject.app`). A screenshot of the GUI is shown below:
+
+![GUI screenshot](ScreenshotGuiMacos.png)
 
 ### 1. Build the Project
 
@@ -51,6 +56,7 @@ Eject command successful, CSW status=0x00
 
 After a successful ejection, your device should now be recognized by the system in its intended mode, and you can proceed with driver installation or usage.
 
+
 # usb_eject (Русский)
 
 Эта MacOS + Linux утилита автоматически извлекает USB-устройства, которые изначально определяются как виртуальный CD-ROM с драйверами (например, некоторые Wi-Fi адаптеры и модемы), чтобы устройство сразу переходило в рабочий режим без ручных действий.
@@ -60,6 +66,12 @@ After a successful ejection, your device should now be recognized by the system 
 ## Скачивание заранее скомпилированного приложения
 
 Вы можете скачать готовое MacOS приложение в разделе "Releases" на странице проекта GitHub. Это самый простой способ начать работу, если вы не хотите собирать программу из исходников.
+
+### Режимы
+
+Программа работает как в консольном режиме, так и с графическим интерфейсом. Запустите её из терминала (см. выше) или используйте прилагаемое macOS GUI-приложение `usb_eject.app` (двойной клик в Finder или `open usb_eject.app`). Ниже приведён скриншот интерфейса:
+
+![Скриншот GUI](ScreenshotGuiMacos.png)
 
 ### 1. Сборка проекта
 
@@ -102,3 +114,4 @@ Eject command successful, CSW status=0x00
 ```
 
 После успешного извлечения ваше устройство должно быть распознано системой в его предполагаемом режиме, и вы сможете продолжить установку драйверов или использование.
+
