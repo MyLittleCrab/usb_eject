@@ -17,7 +17,7 @@ proc load_devices_async {} {
 }
 
 proc load_devices {} {
-    catch {set devices [split [exec ./usb_eject --only-list] "\n"]} err
+    catch {set devices [split [exec ./Eject2Net --only-list] "\n"]} err
     .list delete 0 end
     if {[info exists devices] && [llength $devices] > 0} {
         foreach line $devices {
@@ -47,7 +47,7 @@ button .buttons.eject -text "Eject" -width 10 -command {
         set item [.list get $sel]
         # Парсим VID и PID из строки
         if {[regexp {VID:PID = ([0-9a-fA-F]+):([0-9a-fA-F]+)} $item -> vid pid]} {
-            set exe_path [file join [pwd] "usb_eject"]
+            set exe_path [file join [pwd] "Eject2Net"]
             # Команда с sudo/administrator
             if {$tcl_platform(os) eq "Darwin"} {
                 # macOS: AppleScript для sudo

@@ -5,13 +5,13 @@ wm title . "Select Device"
 wm geometry . 650x550
 
 # Command-line handling: accept a single optional argument which is the path
-# to the usb_eject executable. If provided, set exe_path to that value.
+# to the Eject2Net executable. If provided, set exe_path to that value.
 if {[info exists ::argc] && $::argc > 0} {
     # Take only the first argument
     set arg0 [lindex $::argv 0]
-    # If the argument is a directory, join with usb_eject, otherwise use as-is
+    # If the argument is a directory, join with Eject2Net, otherwise use as-is
     if {[file isdirectory $arg0]} {
-        set exe_path [file join $arg0 "usb_eject"]
+        set exe_path [file join $arg0 "Eject2Net"]
     } else {
         set exe_path $arg0
     }
@@ -31,9 +31,9 @@ proc load_devices_async {} {
 }
 
 proc load_devices {} {
-    # Use provided exe_path if set, otherwise default to ./usb_eject in CWD
+    # Use provided exe_path if set, otherwise default to ./Eject2Net in CWD
     if {![info exists ::exe_path]} {
-        set ::exe_path [file join [pwd] "usb_eject"]
+        set ::exe_path [file join [pwd] "Eject2Net"]
     }
     set exe_path $::exe_path
     catch {set devices [split [exec $exe_path --only-list] "\n"]} err
@@ -66,7 +66,7 @@ button .buttons.eject -text "Eject" -width 10 -command {
         set item [.list get $sel]
         # Ensure exe_path is set (may have been provided as CLI arg)
         if {![info exists ::exe_path]} {
-            set ::exe_path [file join [pwd] "usb_eject"]
+            set ::exe_path [file join [pwd] "Eject2Net"]
         }
         set exe_path $::exe_path
 

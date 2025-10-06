@@ -1,6 +1,6 @@
 # UGREEN USB Wi-Fi Dongle (AC650 and similar models based on Realtek 802.11ac) Use Case
 
-This document describes a common use case for the `usb_eject` utility when dealing with a UGREEN USB Wi-Fi dongle (featuring a Realtek 802.11ac chip) on macOS.
+This document describes a common use case for the `Eject2Net` utility when dealing with a UGREEN USB Wi-Fi dongle (featuring a Realtek 802.11ac chip) on macOS.
 
 ## Problem
 
@@ -19,23 +19,23 @@ Follow the instructions provided by the community driver project for installatio
 
 Refer to the specific driver's documentation for detailed installation steps. You will likely need to restart your computer after driver installation.
 
-### 2. Install `usb_eject` Dependencies
+### 2. Install `Eject2Net` Dependencies
 
-Ensure you have the `usb_eject` utility built and ready to use. If you haven't already, follow the "How to Use" section in the main `README.md` to:
+Ensure you have the `Eject2Net` utility built and ready to use. If you haven't already, follow the "How to Use" section in the main `README.md` to:
 
 *   Install `libusb` and `pkg-config` using `make install-deps`.
-*   Compile the `usb_eject` program using `make`.
+*   Compile the `Eject2Net` program using `make`.
 
-Alternatively, if you are on macOSx64, you can directly use the pre-compiled binary provided in the project root by running `./usb_eject`.
+Alternatively, if you are on macOSx64, you can directly use the pre-compiled binary provided in the project root by running `./Eject2Net`.
 
 ### 3. Eject the Virtual CD-ROM After Each Connection
 
-Because the device reverts to CD-ROM mode each time it's connected, you will need to run `usb_eject` every time you plug in your Wi-Fi adapter:
+Because the device reverts to CD-ROM mode each time it's connected, you will need to run `Eject2Net` every time you plug in your Wi-Fi adapter:
 
 1.  Connect your UGREEN USB Wi-Fi dongle to your Mac.
-2.  Run the `usb_eject` utility:
+2.  Run the `Eject2Net` utility:
     ```bash
-    ./usb_eject
+    ./Eject2Net
     ```
 3.  From the list of detected USB devices, identify your UGREEN Wi-Fi dongle (by VID:PID, Manufacturer, or Product name) and enter its corresponding number to eject it.
 
@@ -45,7 +45,7 @@ Once ejected, your installed Wi-Fi driver should now be able to correctly detect
 
 # Пример использования USB Wi-Fi адаптера UGREEN AC650 и аналогичные модели на базе Realtek 802.11ac
 
-Этот документ описывает распространенный сценарий использования утилиты `usb_eject` при работе с USB Wi-Fi адаптером UGREEN (с чипом Realtek 802.11ac) на macOS.
+Этот документ описывает распространенный сценарий использования утилиты `Eject2Net` при работе с USB Wi-Fi адаптером UGREEN (с чипом Realtek 802.11ac) на macOS.
 
 ## Проблема
 
@@ -64,23 +64,23 @@ USB Wi-Fi адаптеры UGREEN, как и многие другие USB-пе�
 
 Обратитесь к документации конкретного драйвера для получения подробных инструкций по установке. После установки драйвера вам, скорее всего, потребуется перезагрузить компьютер.
 
-### 2. Установите зависимости для `usb_eject`
+### 2. Установите зависимости для `Eject2Net`
 
-Убедитесь, что утилита `usb_eject` собрана и готова к использованию. Если вы еще этого не сделали, следуйте разделу «Как пользоваться» в основном файле `README.md`, чтобы:
+Убедитесь, что утилита `Eject2Net` собрана и готова к использованию. Если вы еще этого не сделали, следуйте разделу «Как пользоваться» в основном файле `README.md`, чтобы:
 
 *   Установить `libusb` и `pkg-config` с помощью `make install-deps`.
-*   Скомпилировать программу `usb_eject` с помощью `make`.
+*   Скомпилировать программу `Eject2Net` с помощью `make`.
 
-В качестве альтернативы, если вы используете macOSx64, вы можете напрямую использовать предварительно скомпилированный бинарный файл, предоставленный в корне проекта, запустив `./usb_eject`.
+В качестве альтернативы, если вы используете macOSx64, вы можете напрямую использовать предварительно скомпилированный бинарный файл, предоставленный в корне проекта, запустив `./Eject2Net`.
 
 ### 3. Извлекайте виртуальный CD-ROM после каждого подключения
 
-Поскольку устройство возвращается в режим CD-ROM при каждом подключении, вам потребуется запускать `usb_eject` каждый раз, когда вы подключаете Wi-Fi адаптер к компьютеру:
+Поскольку устройство возвращается в режим CD-ROM при каждом подключении, вам потребуется запускать `Eject2Net` каждый раз, когда вы подключаете Wi-Fi адаптер к компьютеру:
 
 1.  Подключите USB Wi-Fi адаптер UGREEN к вашему Mac.
-2.  Запустите утилиту `usb_eject`:
+2.  Запустите утилиту `Eject2Net`:
     ```bash
-    ./usb_eject
+    ./Eject2Net
     ```
 3.  Из списка обнаруженных USB-устройств идентифицируйте ваш Wi-Fi адаптер UGREEN (по VID:PID, производителю или названию продукта) и введите соответствующий номер для его извлечения.
 

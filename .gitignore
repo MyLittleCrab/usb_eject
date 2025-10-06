@@ -1,8 +1,8 @@
 .DS_Store
 libusb*
-usb_eject-current
-usb_eject-arm64
-usb_eject-x64
-/usb_eject
+Eject2Net-current
+Eject2Net-arm64
+Eject2Net-x64
+/Eject2Net
 *.o
 log.log

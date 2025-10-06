@@ -1,10 +1,10 @@
-# Makefile for usb_eject utility
+# Makefile for Eject2Net utility
 
 CC      ?= gcc
 CFLAGS  = -Wall -Wextra -std=c99 -pedantic
 LDFLAGS =
-TARGET  = usb_eject
-SRCS    = usb_eject.c
+TARGET  = Eject2Net
+SRCS    = Eject2Net.c
 OBJS    = $(SRCS:.c=.o)
 
 LIBUSB_STATIC_FLAGS = $(shell pkg-config --cflags --libs --static libusb-1.0)

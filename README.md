@@ -1,4 +1,4 @@
-# usb_eject
+# Eject2Net
 
 This MacOS + Linux utility automates the process of ejecting USB devices that initially appear as virtual CD-ROM drives containing drivers (such as some Wi-Fi adapters and modems), allowing the device to switch to its intended working mode without manual intervention.
 
@@ -10,13 +10,13 @@ You can download a ready-to-use precompiled **MacOS** application from the "Rele
 
 ### Modes
 
-The utility works in both console (command-line) and graphical modes. You can run it from the terminal as shown above, or use the included macOS GUI application `usb_eject.app` (double-click it in Finder or run `open usb_eject.app`). A screenshot of the GUI is shown below:
+The utility works in both console (command-line) and graphical modes. You can run it from the terminal as shown above, or use the included macOS GUI application `Eject2Net.app` (double-click it in Finder or run `open Eject2Net.app`). A screenshot of the GUI is shown below:
 
 ![GUI screenshot](ScreenshotGuiMacos.png)
 
 ### 1. Build the Project
 
-To compile the `usb_eject` utility, a `Makefile` is provided for both **macOS** and **Debian-like Linux** distributions.
+To compile the `Eject2Net` utility, a `Makefile` is provided for both **macOS** and **Debian-like Linux** distributions.
 
 #### Compile
 
@@ -24,13 +24,13 @@ Compile the project using `make`:
 ```bash
 make
 ```
-This will create an executable file named `usb_eject` in the project root directory.
+This will create an executable file named `Eject2Net` in the project root directory.
 
 ### 2. Run the Utility
 
 Execute the compiled program:
 ```bash
-sudo ./usb_eject
+sudo ./Eject2Net
 ```
 
 The program will list all connected USB devices with their Vendor ID (VID) and Product ID (PID), along with their manufacturer and product names if available.
@@ -57,7 +57,7 @@ Eject command successful, CSW status=0x00
 After a successful ejection, your device should now be recognized by the system in its intended mode, and you can proceed with driver installation or usage.
 
 
-# usb_eject (Русский)
+# Eject2Net (Русский)
 
 Эта MacOS + Linux утилита автоматически извлекает USB-устройства, которые изначально определяются как виртуальный CD-ROM с драйверами (например, некоторые Wi-Fi адаптеры и модемы), чтобы устройство сразу переходило в рабочий режим без ручных действий.
 
@@ -69,13 +69,13 @@ After a successful ejection, your device should now be recognized by the system 
 
 ### Режимы
 
-Программа работает как в консольном режиме, так и с графическим интерфейсом. Запустите её из терминала (см. выше) или используйте прилагаемое macOS GUI-приложение `usb_eject.app` (двойной клик в Finder или `open usb_eject.app`). Ниже приведён скриншот интерфейса:
+Программа работает как в консольном режиме, так и с графическим интерфейсом. Запустите её из терминала (см. выше) или используйте прилагаемое macOS GUI-приложение `Eject2Net.app` (двойной клик в Finder или `open Eject2Net.app`). Ниже приведён скриншот интерфейса:
 
 ![Скриншот GUI](ScreenshotGuiMacos.png)
 
 ### 1. Сборка проекта
 
-Для компиляции утилиты `usb_eject` предоставляется `Makefile` как для macOS, так и для дистрибутивов Linux на базе Debian.
+Для компиляции утилиты `Eject2Net` предоставляется `Makefile` как для macOS, так и для дистрибутивов Linux на базе Debian.
 
 #### Компиляция
 
@@ -83,13 +83,13 @@ After a successful ejection, your device should now be recognized by the system 
 ```bash
 make
 ```
-Это создаст исполняемый файл с именем `usb_eject` в корневом каталоге проекта.
+Это создаст исполняемый файл с именем `Eject2Net` в корневом каталоге проекта.
 
 ### 2. Запуск утилиты
 
 Запустите скомпилированную программу:
 ```bash
-sudo ./usb_eject
+sudo ./Eject2Net
 ```
 
 Программа выведет список всех подключенных USB-устройств с их Vendor ID (VID) и Product ID (PID), а также названиями производителя и продукта, если они доступны.

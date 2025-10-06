@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
     <key>CFBundleExecutable</key>
-    <string>usbEject</string>
+    <string>Eject2Net</string>
     <key>CFBundleIdentifier</key>
-    <string>nosoff.info.usbEject</string>
+    <string>nosoff.info.Eject2Net</string>
     <key>CFBundleName</key>
-    <string>usbEject</string>
+    <string>Eject2Net</string>
     <key>CFBundleVersion</key>
     <string>1.0</string>
     <key>CFBundleShortVersionString</key>
