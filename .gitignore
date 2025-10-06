@@ -3,5 +3,6 @@ libusb*
 usb_eject-current
 usb_eject-arm64
 usb_eject-x64
-usb_eject
+/usb_eject
 *.o
+log.log
