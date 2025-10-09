@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-# Получаем путь к директории скрипта
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-CONTENTS_DIR="$(dirname "$SCRIPT_DIR")"
-RESOURCES_DIR="$CONTENTS_DIR/Resources"
-
-exec "$RESOURCES_DIR"/bin/wish "$RESOURCES_DIR"/bin/gui.tcl "$RESOURCES_DIR"/bin/Eject2Net
